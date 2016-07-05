@@ -49,17 +49,17 @@ def get_cpu_info(hardware_list, sensor_list):
     cpu_temps = [s for s in sensor_list if (s.SensorType == u'Temperature' and u'cpu' in s.Parent.lower())]
     cpu = [h for h in hardware_list if h.Identifier == cpu_clocks[0].Parent]
     return u'\002CPU\002: %s [%.2fGHz (%.2fGHz)] [%.2f°C (%.2f°C)]' % (cpu[0].Name,
-                                                                        round(avg(float(c.Value) for c in cpu_clocks) / 1024.0, 2),
-                                                                        round(avg(float(c.Max) for c in cpu_clocks) / 1024.0, 2),
-                                                                        round(avg(float(t.Value) for t in cpu_temps), 2),
-                                                                        round(avg(float(t.Max) for t in cpu_temps), 2))
+                                                                       round(avg(float(c.Value) for c in cpu_clocks) / 1024.0, 2),
+                                                                       round(avg(float(c.Max) for c in cpu_clocks) / 1024.0, 2),
+                                                                       round(avg(float(t.Value) for t in cpu_temps), 2),
+                                                                       round(avg(float(t.Max) for t in cpu_temps), 2))
 
 def get_gpu_info(hardware_list, sensor_list):
     gpu_temps = [s for s in sensor_list if (s.SensorType == u'Temperature' and u'gpu' in s.Parent.lower())]
     gpu = [h for h in hardware_list if h.Identifier == gpu_temps[0].Parent]
     return u'\002GPU\002: %s [%.2f°C (%.2f°C)]' % (gpu[0].Name,
-                                                    round(avg(float(t.Value) for t in gpu_temps), 2),
-                                                    round(avg(float(t.Max) for t in gpu_temps), 2))
+                                                   round(avg(float(t.Value) for t in gpu_temps), 2),
+                                                   round(avg(float(t.Max) for t in gpu_temps), 2))
 
 def get_memory_info():
     memory_stats = psutil.virtual_memory()
@@ -70,9 +70,9 @@ def get_disk_info(sensor_list):
     disks = [psutil.disk_usage(s.mountpoint) for s in psutil.disk_partitions()]
     hdd_temps = [s for s in sensor_list if (s.SensorType == u'Temperature' and u'hdd' in s.Parent.lower())]
     return u'\002Storage\002: %.2fTB Used (%.2fTB Total) [%.2f°C (%.2f°C)]' % (round(bytes_to_tbytes(sum([d.used for d in disks])), 2),
-                                                                            round(bytes_to_tbytes(sum([d.total for d in disks])), 2),
-                                                                            round(avg(float(h.Value) for h in hdd_temps), 2),
-                                                                            round(avg(float(h.Max) for h in hdd_temps), 2))
+                                                                               round(bytes_to_tbytes(sum([d.total for d in disks])), 2),
+                                                                               round(avg(float(h.Value) for h in hdd_temps), 2),
+                                                                               round(avg(float(h.Max) for h in hdd_temps), 2))
 
 def get_uptime():
     uptime = datetime.now() - datetime.fromtimestamp(psutil.boot_time())
