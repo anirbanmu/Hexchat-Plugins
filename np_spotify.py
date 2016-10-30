@@ -41,7 +41,7 @@ def spotify_now_playing(spotify_exe_name):
 
 def spotify_now_playing_cb(word, word_eol, userdata):
     now_playing = spotify_now_playing('Spotify.exe')
-    XC.command('me 9np: %s' % ((now_playing + ' (Spotify) ') if now_playing else 'Spotify is not active or paused',))
+    XC.command((u'me 9np: %s' % ((now_playing + u' (Spotify) ') if now_playing else u'Spotify is not active or paused',)).encode('utf-8'))
 
 XC.hook_command("spotify", spotify_now_playing_cb, help="/spotify Announces currently playing song on Spotify")
 XC.prnt(__module_name__ + ' version ' + __module_version__ + ' loaded.')
