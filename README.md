@@ -13,5 +13,4 @@ Hexchat plugins tested with Python 2.7.10 & HexChat 2.12.1.
 + Command: `/spotify`
 + Dependencies:
  + Windows
- + Python libraries:
- 
+ + Python libraries: ctypes
