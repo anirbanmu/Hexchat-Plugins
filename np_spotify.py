@@ -26,7 +26,7 @@ def spotify_now_playing(spotify_exe_name):
 
             exe_name = create_unicode_buffer(MAX_PATH)
             buffer_size = DWORD(MAX_PATH)
-            windll.kernel32.QueryFullProcessImageNameW(process_handle, 0, pointer(exe_name), pointer(buffer_size))
+            windll.kernel32.QueryFullProcessImageNameW(HANDLE(process_handle), 0, pointer(exe_name), pointer(buffer_size))
 
             if spotify_exe_name in exe_name.value:
                 window_title = create_unicode_buffer(MAX_PATH)
