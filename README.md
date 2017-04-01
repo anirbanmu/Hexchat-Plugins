@@ -9,8 +9,14 @@ Hexchat plugins tested with Python 2.7.10 & HexChat 2.12.1.
   + External: [OpenHardwareMonitor](http://openhardwaremonitor.org/) is used to get temperature & clock frequency data (via its WMI interface). Please make sure [OpenHardwareMonitor](http://openhardwaremonitor.org/) is running before invoking the plugin. I recommend setting [OpenHardwareMonitor](http://openhardwaremonitor.org/) to automatically start up with Windows.
 + `wmic` is used instead of the WMI python libraries on pypi because HexChat seems to have some issue when they are used & it causes HexChat to hang.
 
-### Now playing for Spotify
+### Now playing for Spotify (np_spotify.py)
 + Command: `/spotify`
++ Dependencies:
+  + Windows
+  + Python libraries: ctypes
+
+### Now playing for foobar2000 (np_fb2k.py)
++ Command: `/foobar`
 + Dependencies:
   + Windows
   + Python libraries: ctypes
