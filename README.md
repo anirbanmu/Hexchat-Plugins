@@ -13,7 +13,7 @@ Hexchat plugins tested with Python 2.7.10 & HexChat 2.12.1.
 + Command: `/spotify`
 + Dependencies:
   + Windows
-  + Python libraries: ctypes
+  + Python libraries: ctypes, spotipy
 
 ### Now playing for foobar2000 (np_fb2k.py)
 + Command: `/foobar`

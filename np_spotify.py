@@ -4,6 +4,7 @@ __module_description__ = "Displays currently playing song on Spotify"
 __author__ = "Anirban Mukhopadhyay"
 
 import xchat as XC
+import spotipy
 from ctypes import *
 from ctypes.wintypes import *
 
@@ -39,9 +40,29 @@ def spotify_now_playing(spotify_exe_name):
     # Probably paused or not running then
     return None
 
+def get_spotify_info(track):
+    if track is None:
+        return None
+
+    sp = spotipy.Spotify()
+    results = sp.search(q=track, limit=1, type='track')
+
+    tracks = results.get('tracks')
+    if tracks:
+        items = tracks.get('items')
+        if items:
+            return items[0]
+
+    return None
+
 def spotify_now_playing_cb(word, word_eol, userdata):
     now_playing = spotify_now_playing('Spotify.exe')
-    XC.command((u'me 9np: %s' % ((now_playing + u' (Spotify) ') if now_playing else u'Spotify is not active or paused',)).encode('utf-8'))
+    message = u'me 9np: %s' % ((now_playing + u' (Spotify)') if now_playing else u'Spotify is not active or paused',)
+
+    spotify_info = get_spotify_info(now_playing)
+    if spotify_info:
+        message = message + u' [ ' + spotify_info['external_urls']['spotify'] + u' ]' + ' [ ' + spotify_info['uri'] + ' ]'
+    XC.command(message.encode('utf-8'))
 
 XC.hook_command("spotify", spotify_now_playing_cb, help="/spotify Announces currently playing song on Spotify")
 XC.prnt(__module_name__ + ' version ' + __module_version__ + ' loaded.')
