@@ -5,6 +5,7 @@ __author__ = "Anirban Mukhopadhyay"
 
 import xchat as XC
 import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 from ctypes import *
 from ctypes.wintypes import *
 
@@ -44,7 +45,8 @@ def get_spotify_info(track):
     if track is None:
         return None
 
-    sp = spotipy.Spotify()
+    client_credentials_manager = SpotifyClientCredentials(client_id='5496075e0db74e0ab6d03586b21a2830', client_secret='0036ce7987814eaa8ac61080c3650253')
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
     results = sp.search(q=track, limit=1, type='track')
 
     tracks = results.get('tracks')
